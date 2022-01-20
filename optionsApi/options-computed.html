@@ -85,8 +85,14 @@
               }
             },
             computed: {
-              total() {
-                return this.carts.reduce((acc, cur) => acc + cur.price, 0);
+              total: {
+                get() {
+                  let total = this.carts.reduce((acc, cur) => acc + cur.price, 0)
+                  return this.sum || total;
+                },
+                set(val) {
+                  this.sum = val
+                }
               },
               filterProducts() {
                 return this.products.filter((item) => item.name.match(this.search))
